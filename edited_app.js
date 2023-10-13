@@ -3,7 +3,7 @@ function getPlot(id){
         console.log(sampledata)
         var ids= sampledata.samples[0].otu_ids;
         console.log(ids)
-        var sampleValyes= sampledata.samples[0].sample_values.slice(0,10).reverse();
+        var sampleValues= sampledata.samples[0].sample_values.slice(0,10).reverse();
         console.log(sampleValues)
         var lables= sampledata.samples[0].otu_labels.slice(0,10);
         console.log(lables)
@@ -23,7 +23,7 @@ function getPlot(id){
             var layout={
                 yaxis:{tickmode: "linear",},
             };
-        Ploty.newPlot("bar", data, layout);
+            Plotly.newPlot("bar", data, layout);
             var trace1= {
                 x: sampledata.samples[0].otu_ids,
                 y: sampledata.samples[0].sample_values,
@@ -33,12 +33,12 @@ function getPlot(id){
             var data1= [trace1];
 
             })
-        Ploty.newPlot("bubble", data1);
+            Plotly.newPlot("bubble", data1);
         };
     
 function getDemoInfo(id){
     d3.json("samples.json").then (sampledata=>{
-        var metadata= data.metadata;
+        var metadata= sampledata.metadata;
         console.log(metadata)
         var result = metadata.filter(meta => meta.id.toString() === id)[0];
        var demographicInfo = d3.select("#sample-metadata");
