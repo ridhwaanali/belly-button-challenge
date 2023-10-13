@@ -37,7 +37,7 @@ function getPlot(id){
         };
     
 function getDemoInfo(id){
-    d3.json("samples.json").then (sampledata=>{
+    d3.json("../samples.json").then (sampledata=>{
         var metadata= sampledata.metadata;
         console.log(metadata)
         var result = metadata.filter(meta => meta.id.toString() === id)[0];
@@ -55,7 +55,7 @@ function optionChanged(id) {
 
 function init() {
     var dropdown = d3.select("#selDataset");
-    d3.json("samples.json").then((data)=> {
+    d3.json("../samples.json").then((data)=> {
         console.log(data)
         data.names.forEach(function(name) {
             dropdown.append("option").text(name).property("value");
