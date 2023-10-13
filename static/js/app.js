@@ -1,9 +1,9 @@
 function getPlot(id){
-    d3.json("samples.json").then (sampledata=>{
+    d3.json("../samples.json").then (sampledata=>{
         console.log(sampledata)
         var ids= sampledata.samples[0].otu_ids;
         console.log(ids)
-        var sampleValyes= sampledata.samples[0].sample_values.slice(0,10).reverse();
+        var sampleValues= sampledata.samples[0].sample_values.slice(0,10).reverse();
         console.log(sampleValues)
         var lables= sampledata.samples[0].otu_labels.slice(0,10);
         console.log(lables)
@@ -18,21 +18,27 @@ function getPlot(id){
             text: lables,
             marker: {color: 'blue'},
             type: "bar",
+        }
             var data= [trace];
-        Ploty.newPlot("bar", data);
+            var layout={
+                yaxis:{tickmode: "linear",},
+            };
+            Plotly.newPlot("bar", data, layout);
             var trace1= {
                 x: sampledata.samples[0].otu_ids,
                 y: sampledata.samples[0].sample_values,
                 marker: {size: sampledata.samples[0].sample_values, color: sampledata.samples[0].otu_ids},
                 text: sampledata.samples[0].otu_labels
             };
-            };
-        Ploty.newPlot("bubble", data1);
-        });
-    }
+            var data1= [trace1];
+
+            })
+            Plotly.newPlot("bubble", data1);
+        };
+    
 function getDemoInfo(id){
-    d3.json("samples.json").then (sampledata=>{
-        var metadata= data.metadata;
+    d3.json("../samples.json").then (sampledata=>{
+        var metadata= sampledata.metadata;
         console.log(metadata)
         var result = metadata.filter(meta => meta.id.toString() === id)[0];
        var demographicInfo = d3.select("#sample-metadata");
@@ -49,7 +55,7 @@ function optionChanged(id) {
 
 function init() {
     var dropdown = d3.select("#selDataset");
-    d3.json("samples.json").then((data)=> {
+    d3.json("../samples.json").then((data)=> {
         console.log(data)
         data.names.forEach(function(name) {
             dropdown.append("option").text(name).property("value");
